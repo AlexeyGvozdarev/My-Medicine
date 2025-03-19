@@ -78,21 +78,3 @@ class RecyclerViewFragment : Fragment(R.layout.fragment_recycler_view) {
         _binding = null
     }
 }
-
-
-
-//class RecyclerViewFragment : Fragment() {
-//    lateinit var binding: FragmentRecyclerViewBinding
-//
-//    override fun onCreateView(
-//        inflater: LayoutInflater, container: ViewGroup?,
-//        savedInstanceState: Bundle?
-//    ): View? {
-//        binding = FragmentRecyclerViewBinding.inflate(layoutInflater,container,false)
-//        return binding.root
-//    }
-//
-//    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-//        super.onViewCreated(view, savedInstanceState)
-//    }
-//}
