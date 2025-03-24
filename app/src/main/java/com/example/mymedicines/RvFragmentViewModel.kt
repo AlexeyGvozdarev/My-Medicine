@@ -54,5 +54,6 @@ open class RvFragmentViewModel:ViewModel() {
             Item("Carvedilol"),
             Item("Montelukast")
         )
+        _items.value = itemList
     }
 }
