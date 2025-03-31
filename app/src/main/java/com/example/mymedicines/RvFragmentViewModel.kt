@@ -15,4 +15,10 @@ open class RvFragmentViewModel(private val repository: ItemRepository):ViewModel
             _items.value = repository.getItems()
         }
     }
+    fun addNewItem(items: Item){
+        viewModelScope.launch {
+            repository.addItem(items)
+            loadItems()
+        }
+    }
 }

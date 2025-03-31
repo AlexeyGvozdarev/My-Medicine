@@ -40,6 +40,10 @@ class RecyclerViewFragment : Fragment(R.layout.fragment_recycler_view) {
             adapter.updateItems(items)
         })
         viewModel.loadItems()
+
+        binding.fab.setOnClickListener(){
+
+        }
     }
 
 
