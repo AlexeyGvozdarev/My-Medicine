@@ -5,7 +5,13 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mymedicines.databinding.ItemListBinding
 
-class MedicineAdapter(private val items: List<Item>): RecyclerView.Adapter<MedicineAdapter.ViewHolder>() {
+class MedicineAdapter(private var items: List<Item>): RecyclerView.Adapter<MedicineAdapter.ViewHolder>() {
+
+    fun updateItems(newItems: List<Item>) {
+        items = newItems
+        notifyDataSetChanged()
+
+    }
 
     //создание ViewHolder с Binding
     class ViewHolder(val binding: ItemListBinding): RecyclerView.ViewHolder(binding.root)
