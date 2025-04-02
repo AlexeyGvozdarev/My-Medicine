@@ -11,6 +11,8 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mymedicines.databinding.FragmentRecyclerViewBinding
+import java.util.random.RandomGenerator
+import kotlin.random.Random
 
 class RecyclerViewFragment : Fragment(R.layout.fragment_recycler_view) {
 
@@ -42,7 +44,9 @@ class RecyclerViewFragment : Fragment(R.layout.fragment_recycler_view) {
         viewModel.loadItems()
 
         binding.fab.setOnClickListener(){
-
+            val randInt = Random.nextInt(1,10)
+            val randItem = Item("Препарат N: $randInt")
+            viewModel.addNewItem(randItem)
         }
     }
 
