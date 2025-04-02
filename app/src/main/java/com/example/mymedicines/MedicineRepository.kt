@@ -53,4 +53,8 @@ class MedicineRepository: ItemRepository {
         return items.toList()
     }
 
+    override suspend fun addItem(item: Item) {
+        items.add(item)
+    }
+
 }
