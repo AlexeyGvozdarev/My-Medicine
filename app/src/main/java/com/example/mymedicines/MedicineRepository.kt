@@ -54,7 +54,16 @@ class MedicineRepository: ItemRepository {
     }
 
     override suspend fun addItem(item: Item) {
-        items.add(item)
+        val div = item
+        val regex = "\\d+".toRegex()
+        val num = regex.find(div.toString())?.value?.toIntOrNull()
+        if (num != null) {
+            if (num % 2 == 0){
+                items.add(item)
+            }else{
+                items.add(0,item)
+            }
+        }
     }
 
 }
