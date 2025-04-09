@@ -1,6 +1,8 @@
 package com.example.mymedicines
 
-class MedicineRepository: ItemRepository {
+import android.util.Log
+
+class MedicineRepository : ItemRepository {
     private val items = mutableListOf<Item>()
 
     init {
@@ -49,8 +51,23 @@ class MedicineRepository: ItemRepository {
             )
         )
     }
+
     override suspend fun getItems(): List<Item> {
         return items.toList()
     }
 
+    override suspend fun addItem(item: Item) {
+
+        val value = item.value
+        Log.d("TAG", "addItem: $value")
+        val regex = "\\d+".toRegex()
+        val num = regex.find(value)?.value?.toIntOrNull() ?: return
+
+        if (num % 2 == 0) {
+            items.add(item)
+        } else {
+            items.add(0, item)
+        }
+
+    }
 }
