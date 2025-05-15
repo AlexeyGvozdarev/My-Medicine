@@ -8,8 +8,9 @@ import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
+import kotlin.random.Random
 
- class RvFragmentViewModel(private val repository: ItemRepository):ViewModel() {
+class RvFragmentViewModel(private val repository: ItemRepository):ViewModel() {
     private val _items = MutableLiveData<List<Item>>()
     val items: LiveData<List<Item>> get() = _items
 
@@ -21,10 +22,15 @@ import kotlinx.coroutines.launch
             }
         }
     }
-     fun addNewItem(items: Item) {
+     fun addNewItem() {
+         val randInt = Random.nextInt(1,10)
+         val value = "Препарат N:"
+         val randItem = Item(value,randInt)
+
+
          Log.d("TAG", "addItems: $items")
          viewModelScope.launch {
-             repository.addItem(items)
+             repository.addItem(randItem)
 
          }
      }
