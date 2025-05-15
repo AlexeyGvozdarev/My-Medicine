@@ -8,11 +8,8 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 
 class MedicineRepository : ItemRepository {
-    private val _dataFlow = MutableStateFlow<List<Item>>(emptyList())//*
-    override val dataFlow: StateFlow<List<Item>> = _dataFlow.asStateFlow()//*
-
-
-        // private val items = mutableListOf<Item>()
+    private val _dataFlow = MutableStateFlow<List<Item>>(emptyList())
+    override val dataFlow: StateFlow<List<Item>> = _dataFlow.asStateFlow()
 
     init {
         _dataFlow.value = (
@@ -60,33 +57,20 @@ class MedicineRepository : ItemRepository {
             )
         )
     }
-
-//    override suspend fun getItems(): List<Item> {
-//        TODO("Not yet implemented")
-//    }
-
-//    override suspend fun getItems(): List<Item> {
-//        return items.toList()// возвратить флоу с типом лист< айтем>
-//    }
-
     override suspend fun addItem(item: Item) {
 
         val value = _dataFlow.value
         Log.d("TAG", "addItem: $value")
         val regex = "\\d+".toRegex()
-        val num = regex.find(value.toString())?.value?.toIntOrNull() ?: return
+        val num = regex.find(item.toString())?.value?.toIntOrNull() ?: return
 
-        // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         val mutableValue = value.toMutableList()
         if (num % 2 == 0) {
             mutableValue.add(item)
-           // _dataFlow.value = value + item
         } else {
 
             mutableValue.add(0,item)
-           // _dataFlow.value = mutableValue
         }
         _dataFlow.emit(mutableValue)
-
     }
 }

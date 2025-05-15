@@ -13,8 +13,6 @@ import kotlinx.coroutines.launch
     private val _items = MutableLiveData<List<Item>>()
     val items: LiveData<List<Item>> get() = _items
 
-    //val flow: StateFlow<List<Item>> = repository.dataFlow
-
     init {
         viewModelScope.launch {
             repository.dataFlow.collect { newItems ->
@@ -33,9 +31,6 @@ import kotlinx.coroutines.launch
 }
 
 
-//        viewModelScope.launch {
-//            repository.addItem(items)
-//            loadItems()
 
 
 
