@@ -41,7 +41,7 @@ class RecyclerViewFragment : Fragment(R.layout.fragment_recycler_view) {
         viewModel.items.observe(viewLifecycleOwner, Observer {items->
             adapter.updateItems(items)
         })
-        viewModel.loadItems()
+            // viewModel.loadItems()
 
         binding.fab.setOnClickListener(){
             val randInt = Random.nextInt(1,10)

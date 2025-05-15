@@ -1,12 +1,21 @@
 package com.example.mymedicines
 
 import android.util.Log
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.update
 
 class MedicineRepository : ItemRepository {
-    private val items = mutableListOf<Item>()
+    private val _dataFlow = MutableStateFlow<List<Item>>(emptyList())//*
+    override val dataFlow: StateFlow<List<Item>> = _dataFlow.asStateFlow()//*
+
+
+        // private val items = mutableListOf<Item>()
 
     init {
-        items.addAll(
+        _dataFlow.value = (
             listOf(
                 Item("Ibuprofen"),
                 Item("Paracetamol"),
@@ -52,22 +61,32 @@ class MedicineRepository : ItemRepository {
         )
     }
 
-    override suspend fun getItems(): List<Item> {
-        return items.toList()
-    }
+//    override suspend fun getItems(): List<Item> {
+//        TODO("Not yet implemented")
+//    }
+
+//    override suspend fun getItems(): List<Item> {
+//        return items.toList()// возвратить флоу с типом лист< айтем>
+//    }
 
     override suspend fun addItem(item: Item) {
 
-        val value = item.value
+        val value = _dataFlow.value
         Log.d("TAG", "addItem: $value")
         val regex = "\\d+".toRegex()
-        val num = regex.find(value)?.value?.toIntOrNull() ?: return
+        val num = regex.find(value.toString())?.value?.toIntOrNull() ?: return
 
+        // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        val mutableValue = value.toMutableList()
         if (num % 2 == 0) {
-            items.add(item)
+            mutableValue.add(item)
+           // _dataFlow.value = value + item
         } else {
-            items.add(0, item)
+
+            mutableValue.add(0,item)
+           // _dataFlow.value = mutableValue
         }
+        _dataFlow.emit(mutableValue)
 
     }
 }
