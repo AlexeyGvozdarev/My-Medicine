@@ -61,17 +61,13 @@ class MedicineRepository : ItemRepository {
 
         val value = _dataFlow.value
         Log.d("TAG", "addItem: $value")
-//        val regex = "\\d+".toRegex()
-//        val num = regex.find(item.toString())?.value?.toIntOrNull() ?: return
-
         val mutableValue = value.toMutableList()
-        val num = item.number
+        val num = item.number?.let { item.isOdd(it) }
         if (num != null) {
-            if (num % 2 == 0) {
+            if (num == true){
                 Log.d("TAG", "Number: $num")
                 mutableValue.add(item)
-            } else {
-
+            }else{
                 mutableValue.add(0,item)
             }
         }

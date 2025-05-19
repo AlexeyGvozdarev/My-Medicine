@@ -27,7 +27,7 @@ class MedicineAdapter(private var items: List<Item>): RecyclerView.Adapter<Medic
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = items[position]
-        holder.binding.textView.text = item.value
+        holder.binding.textView.text = item.toString()
     }
 
 }
