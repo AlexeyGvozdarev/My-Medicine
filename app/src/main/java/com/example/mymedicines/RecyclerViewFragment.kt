@@ -43,8 +43,6 @@ class RecyclerViewFragment : Fragment(R.layout.fragment_recycler_view) {
         })
 
         binding.fab.setOnClickListener(){
-//            val randInt = Random.nextInt(1,10)
-//            val randItem = Item("Препарат N: $randInt")
             viewModel.addNewItem()
         }
     }

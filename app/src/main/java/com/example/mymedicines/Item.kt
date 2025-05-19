@@ -7,10 +7,6 @@ data class Item(
     override fun toString(): String {
         return "$value $number"
     }
-    fun isOdd(number: Int): Boolean {
-        if (number % 2 == 0){
-            return true
-        }else return false
-    }
+    fun isEven(number: Int): Boolean = number % 2 != 0
 
 }
