@@ -84,6 +84,7 @@ class MedicineRepository : ItemRepository {
 
             if (isNumEven) updatedList.add(0,item)
             else updatedList.add(item)
+
             updatedList
         }
     }

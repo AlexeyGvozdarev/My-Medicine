@@ -5,7 +5,7 @@ data class Item(
     val number: Int? = null
 ){
     override fun toString(): String {
-        return "$value $number"
+        return if (number != null) "$value $number" else "$value"
     }
     fun isEven(number: Int): Boolean = number % 2 != 0
 
