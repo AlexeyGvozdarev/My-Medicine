@@ -5,5 +5,5 @@ import kotlinx.coroutines.flow.StateFlow
 
 interface ItemRepository {
     val dataFlow: StateFlow<List<Item>>
-    suspend fun addItem(item: Item)
+     fun addItem(item: Item)
 }

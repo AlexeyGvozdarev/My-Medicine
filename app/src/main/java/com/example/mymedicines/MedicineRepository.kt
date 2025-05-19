@@ -4,6 +4,7 @@ import android.util.Log
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.update
 
 class MedicineRepository : ItemRepository {
     private val _dataFlow = MutableStateFlow<List<Item>>(emptyList())
@@ -55,18 +56,35 @@ class MedicineRepository : ItemRepository {
             )
         )
     }
-    override suspend fun addItem(item: Item) {
+    override  fun addItem(item: Item) {
+        //addItemEmit(item)
+        addItemUpdate(item)
+
+    }
+    private suspend fun addItemEmit(item: Item){
         if (item.number == null) return
         val value = _dataFlow.value
         Log.d("TAG", "addItem: $value")
         val mutableValue = value.toMutableList()
         val isNumEven = item.number?.let { item.isEven(it) }
-            if (isNumEven != true){
-                Log.d("TAG", "Number: $isNumEven")
-                mutableValue.add(item)
-            }else{
-                mutableValue.add(0,item)
+        if (isNumEven != true){
+            Log.d("TAG", "Number: $isNumEven")
+            mutableValue.add(item)
+        }else{
+            mutableValue.add(0,item)
         }
         _dataFlow.emit(mutableValue)
+    }
+
+    private fun addItemUpdate(item: Item){
+        if (item.number == null) return
+        _dataFlow.update { currentList ->
+            val updatedList = currentList.toMutableList()
+            val isNumEven = item.isEven(item.number)
+
+            if (isNumEven) updatedList.add(0,item)
+            else updatedList.add(item)
+            updatedList
+        }
     }
 }
