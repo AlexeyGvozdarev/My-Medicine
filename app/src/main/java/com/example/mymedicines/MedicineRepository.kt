@@ -67,11 +67,12 @@ class MedicineRepository : ItemRepository {
         Log.d("TAG", "addItem: $value")
         val mutableValue = value.toMutableList()
         val isNumEven = item.number?.let { item.isEven(it) }
-        if (isNumEven != true){
+        if (isNumEven == true){
+            mutableValue.add(0,item)
+        }else{
             Log.d("TAG", "Number: $isNumEven")
             mutableValue.add(item)
-        }else{
-            mutableValue.add(0,item)
+
         }
         _dataFlow.emit(mutableValue)
     }
