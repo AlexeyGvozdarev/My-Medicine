@@ -12,64 +12,66 @@ class MedicineRepository : ItemRepository {
 
     init {
         _dataFlow.value = (
-            listOf(
-                Item("Ibuprofen"),
-                Item("Paracetamol"),
-                Item("Aspirin"),
-                Item("Amoxicillin"),
-                Item("Metformin"),
-                Item("Atorvastatin"),
-                Item("Omeprazole"),
-                Item("Losartan"),
-                Item("Gabapentin"),
-                Item("Levothyroxine"),
-                Item("Prednisone"),
-                Item("Sertraline"),
-                Item("Lisinopril"),
-                Item("Furosemide"),
-                Item("Ciprofloxacin"),
-                Item("Simvastatin"),
-                Item("Azithromycin"),
-                Item("Tramadol"),
-                Item("Doxycycline"),
-                Item("Amlodipine"),
-                Item("Clopidogrel"),
-                Item("Cetirizine"),
-                Item("Ranitidine"),
-                Item("Metoprolol"),
-                Item("Fluoxetine"),
-                Item("Warfarin"),
-                Item("Hydrochlorothiazide"),
-                Item("Alprazolam"),
-                Item("Diazepam"),
-                Item("Hydrocodone"),
-                Item("Tamsulosin"),
-                Item("Meloxicam"),
-                Item("Lorazepam"),
-                Item("Topiramate"),
-                Item("Venlafaxine"),
-                Item("Bupropion"),
-                Item("Naproxen"),
-                Item("Duloxetine"),
-                Item("Carvedilol"),
-                Item("Montelukast")
-            )
-        )
+                listOf(
+                    Item("Ibuprofen"),
+                    Item("Paracetamol"),
+                    Item("Aspirin"),
+                    Item("Amoxicillin"),
+                    Item("Metformin"),
+                    Item("Atorvastatin"),
+                    Item("Omeprazole"),
+                    Item("Losartan"),
+                    Item("Gabapentin"),
+                    Item("Levothyroxine"),
+                    Item("Prednisone"),
+                    Item("Sertraline"),
+                    Item("Lisinopril"),
+                    Item("Furosemide"),
+                    Item("Ciprofloxacin"),
+                    Item("Simvastatin"),
+                    Item("Azithromycin"),
+                    Item("Tramadol"),
+                    Item("Doxycycline"),
+                    Item("Amlodipine"),
+                    Item("Clopidogrel"),
+                    Item("Cetirizine"),
+                    Item("Ranitidine"),
+                    Item("Metoprolol"),
+                    Item("Fluoxetine"),
+                    Item("Warfarin"),
+                    Item("Hydrochlorothiazide"),
+                    Item("Alprazolam"),
+                    Item("Diazepam"),
+                    Item("Hydrocodone"),
+                    Item("Tamsulosin"),
+                    Item("Meloxicam"),
+                    Item("Lorazepam"),
+                    Item("Topiramate"),
+                    Item("Venlafaxine"),
+                    Item("Bupropion"),
+                    Item("Naproxen"),
+                    Item("Duloxetine"),
+                    Item("Carvedilol"),
+                    Item("Montelukast")
+                )
+                )
     }
-    override  fun addItem(item: Item) {
+
+    override fun addItem(item: Item) {
         //addItemEmit(item)
         addItemUpdate(item)
 
     }
-    private suspend fun addItemEmit(item: Item){
+
+    private suspend fun addItemEmit(item: Item) {
         if (item.number == null) return
         val value = _dataFlow.value
         Log.d("TAG", "addItem: $value")
         val mutableValue = value.toMutableList()
-        val isNumEven = item.number?.let { item.isEven(it) }
-        if (isNumEven == true){
-            mutableValue.add(0,item)
-        }else{
+        val isNumEven = item.isEven()
+        if (isNumEven) {
+            mutableValue.add(0, item)
+        } else {
             Log.d("TAG", "Number: $isNumEven")
             mutableValue.add(item)
 
@@ -77,15 +79,17 @@ class MedicineRepository : ItemRepository {
         _dataFlow.emit(mutableValue)
     }
 
-    private fun addItemUpdate(item: Item){
+    private fun addItemUpdate(item: Item) {
         if (item.number == null) return
         _dataFlow.update { currentList ->
             val updatedList = currentList.toMutableList()
-            val isNumEven = item.isEven(item.number)
+            val isNumEven = item.isEven()
 
-            if (isNumEven) updatedList.add(0,item)
-            else updatedList.add(item)
-
+            if (isNumEven) {
+                updatedList.add(0, item)
+            } else {
+                updatedList.add(item)
+            }
             updatedList
         }
     }
