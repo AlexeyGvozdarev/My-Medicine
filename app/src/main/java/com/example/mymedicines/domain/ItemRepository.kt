@@ -1,6 +1,6 @@
-package com.example.mymedicines
+package com.example.mymedicines.domain
 
-import kotlinx.coroutines.flow.MutableStateFlow
+import com.example.mymedicines.model.Item
 import kotlinx.coroutines.flow.StateFlow
 
 interface ItemRepository {

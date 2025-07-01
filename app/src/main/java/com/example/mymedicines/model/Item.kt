@@ -1,4 +1,4 @@
-package com.example.mymedicines
+package com.example.mymedicines.model
 
 data class Item(
     val value: String,

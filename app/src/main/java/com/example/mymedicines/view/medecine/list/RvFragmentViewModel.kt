@@ -1,12 +1,12 @@
-package com.example.mymedicines
+package com.example.mymedicines.view.medecine.list
 
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.collect
+import com.example.mymedicines.model.Item
+import com.example.mymedicines.domain.ItemRepository
 import kotlinx.coroutines.launch
 import kotlin.random.Random
 

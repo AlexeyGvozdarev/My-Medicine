@@ -8,7 +8,7 @@
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/fragmentContainerView"
-        android:name="com.example.mymedicines.RecyclerViewFragment"
+        android:name="com.example.mymedicines.view.medecine.list.RecyclerViewFragment"
         android:layout_width="0dp"
         android:layout_height="0dp"
         xlmns:layout_constraintBottom_toBottomOf="parent"

@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.commit
 import com.example.mymedicines.databinding.ActivityMainBinding
+import com.example.mymedicines.view.medecine.list.RecyclerViewFragment
 
 class MainActivity : AppCompatActivity() {
 

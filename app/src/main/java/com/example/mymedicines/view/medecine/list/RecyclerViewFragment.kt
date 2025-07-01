@@ -1,18 +1,14 @@
-package com.example.mymedicines
+package com.example.mymedicines.view.medecine.list
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.mymedicines.R
 import com.example.mymedicines.databinding.FragmentRecyclerViewBinding
-import java.util.random.RandomGenerator
-import kotlin.random.Random
+import com.example.mymedicines.domain.MedicineRepository
 
 class RecyclerViewFragment : Fragment(R.layout.fragment_recycler_view) {
 
@@ -44,6 +40,7 @@ class RecyclerViewFragment : Fragment(R.layout.fragment_recycler_view) {
 
         binding.fab.setOnClickListener(){
             viewModel.addNewItem()
+            //заменить кнопку на кнопку перехода на новый фрагмент
         }
     }
 
