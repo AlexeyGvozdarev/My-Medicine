@@ -2,6 +2,7 @@ package com.example.mymedicines
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
 import com.example.mymedicines.databinding.ActivityMainBinding
 import com.example.mymedicines.view.medecine.list.RecyclerViewFragment
@@ -25,6 +26,22 @@ class MainActivity : AppCompatActivity() {
                 setReorderingAllowed(true)
                 replace(binding.fragmentContainerView.id, RecyclerViewFragment::class.java, null)
             }
+        }
+    }
+
+    fun replaceFragment(fragment: Fragment) {
+        supportFragmentManager.beginTransaction().apply {
+            replace(binding.fragmentContainerView.id, fragment)
+            addToBackStack(null)
+            commit()
+        }
+    }
+
+    fun popFragmentBack() {
+        if (supportFragmentManager.backStackEntryCount > 0) {
+            supportFragmentManager.popBackStack()
+        } else {
+            finish()
         }
     }
 }

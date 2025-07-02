@@ -6,16 +6,22 @@ import android.view.View
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.mymedicines.MainActivity
 import com.example.mymedicines.R
 import com.example.mymedicines.databinding.FragmentRecyclerViewBinding
 import com.example.mymedicines.domain.MedicineRepository
+import com.example.mymedicines.model.Item
+import com.example.mymedicines.view.medecine.newMed.NewMedecineFragment
 
 class RecyclerViewFragment : Fragment(R.layout.fragment_recycler_view) {
 
-    // Переменная для View Binding
     private var _binding: FragmentRecyclerViewBinding? = null
     private val binding get() = _binding!!
     private lateinit var viewModel: RvFragmentViewModel
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -23,7 +29,7 @@ class RecyclerViewFragment : Fragment(R.layout.fragment_recycler_view) {
         val repository = MedicineRepository()
 
         val viewModelFactory = MedecineViewModelFactory(repository)
-        viewModel = ViewModelProvider(this,viewModelFactory).get(RvFragmentViewModel::class.java)
+        viewModel = ViewModelProvider(this, viewModelFactory).get(RvFragmentViewModel::class.java)
 
         // Инициализация View Binding
         _binding = FragmentRecyclerViewBinding.bind(view)
@@ -34,13 +40,23 @@ class RecyclerViewFragment : Fragment(R.layout.fragment_recycler_view) {
         val adapter = MedicineAdapter(emptyList())
         binding.recyclerView.adapter = adapter
 
-        viewModel.items.observe(viewLifecycleOwner, Observer {items->
+        viewModel.items.observe(viewLifecycleOwner, Observer { items ->
             adapter.updateItems(items)
         })
 
-        binding.fab.setOnClickListener(){
+        binding.fab.setOnClickListener() {
             viewModel.addNewItem()
-            //заменить кнопку на кнопку перехода на новый фрагмент
+
+        }
+        binding.toNewFragmentButton.setOnClickListener {
+            (activity as? MainActivity)?.replaceFragment(NewMedecineFragment())
+        }
+        parentFragmentManager.setFragmentResultListener("requestKey", this) { requestKey, bundle ->
+            if (requestKey == "requestKey") {
+                val resultString = bundle.getString("dataKey", "")
+
+            }
+
         }
     }
 

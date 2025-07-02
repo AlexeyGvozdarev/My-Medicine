@@ -20,4 +20,12 @@
         android:layout_margin="16dp"
         android:src="@drawable/ic_launcher_foreground" />
 
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/toNewFragmentButton"
+        android:layout_width="385dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top|end"
+        android:layout_margin="16dp"
+        android:text="Return" />
+
 </FrameLayout>

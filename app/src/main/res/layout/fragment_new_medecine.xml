@@ -9,7 +9,7 @@
         android:id="@+id/editText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="название лекарства"
+        android:hint="название лекарства"
         xlmns:layout_constraintBottom_toBottomOf="parent"
         xlmns:layout_constraintEnd_toEndOf="parent"
         xlmns:layout_constraintStart_toStartOf="parent"
