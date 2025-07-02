@@ -1,24 +1,43 @@
 package com.example.mymedicines
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
+import kotlin.random.Random
 
-open class RvFragmentViewModel(private val repository: ItemRepository):ViewModel() {
+class RvFragmentViewModel(private val repository: ItemRepository):ViewModel() {
     private val _items = MutableLiveData<List<Item>>()
-    val items:LiveData<List<Item>>get() = _items
+    val items: LiveData<List<Item>> get() = _items
 
-    fun loadItems(){
+    init {
         viewModelScope.launch {
-            _items.value = repository.getItems()
+            repository.dataFlow.collect { newItems ->
+                Log.d("TAG", "collect: $newItems")
+                _items.value = newItems
+            }
         }
     }
-    fun addNewItem(items: Item){
-        viewModelScope.launch {
-            repository.addItem(items)
-            loadItems()
-        }
-    }
+     fun addNewItem() {
+         val randInt = Random.nextInt(1,10)
+         val value = "Препарат N:"
+         val randItem = Item(value,randInt)
+
+
+         Log.d("TAG", "addItems: $items")
+         viewModelScope.launch {
+             repository.addItem(randItem)
+
+         }
+     }
+
 }
+
+
+
+
+
