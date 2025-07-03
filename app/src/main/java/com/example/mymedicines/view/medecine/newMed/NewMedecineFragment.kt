@@ -30,7 +30,7 @@ class NewMedecineFragment : Fragment() {
 
         binding.returnFab.setOnClickListener {
             //подготавливаем данные для передачи
-            val resultData = bundleOf("dataKey" to binding.editText.toString())
+            val resultData = bundleOf("dataKey" to binding.editText.text.toString())
             //отправка резулььтата
             parentFragmentManager.setFragmentResult("requestKey", resultData)
             //возврат на первый фрагмент

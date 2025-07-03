@@ -22,20 +22,30 @@ class RvFragmentViewModel(private val repository: ItemRepository):ViewModel() {
             }
         }
     }
-     fun addNewItem() {
-         val randInt = Random.nextInt(1,10)
-         val value = "Препарат N:"
-         val randItem = Item(value,randInt)
 
+    fun addNewItem(item: String) {
+        val newItem = Item(item)
 
-         Log.d("TAG", "addItems: $items")
-         viewModelScope.launch {
-             repository.addItem(randItem)
+        Log.d("TAG", "addItems: $items")
+        viewModelScope.launch {
+            repository.addItem(newItem)
 
-         }
+        }
+    }
+//     fun addNewItem() {
+//         val randInt = Random.nextInt(1,10)
+//         val value = "Препарат N:"
+//         val randItem = Item(value,randInt)
+//
+//
+//         Log.d("TAG", "addItems: $items")
+//         viewModelScope.launch {
+//             repository.addItem(randItem)
+//
+//         }
      }
 
-}
+
 
 
 

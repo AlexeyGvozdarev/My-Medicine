@@ -19,10 +19,6 @@ class RecyclerViewFragment : Fragment(R.layout.fragment_recycler_view) {
     private val binding get() = _binding!!
     private lateinit var viewModel: RvFragmentViewModel
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -44,20 +40,24 @@ class RecyclerViewFragment : Fragment(R.layout.fragment_recycler_view) {
             adapter.updateItems(items)
         })
 
+
+
         binding.fab.setOnClickListener() {
-            viewModel.addNewItem()
 
-        }
-        binding.toNewFragmentButton.setOnClickListener {
             (activity as? MainActivity)?.replaceFragment(NewMedecineFragment())
-        }
-        parentFragmentManager.setFragmentResultListener("requestKey", this) { requestKey, bundle ->
-            if (requestKey == "requestKey") {
-                val resultString = bundle.getString("dataKey", "")
-
+            parentFragmentManager.setFragmentResultListener(
+                "requestKey",
+                this
+            ) { requestKey, bundle ->
+                if (requestKey == "requestKey") {
+                    val resultString = bundle.getString("dataKey", "")
+                    viewModel.addNewItem(resultString)
+                }
             }
 
+
         }
+
     }
 
 
