@@ -22,10 +22,11 @@ class RecyclerViewFragment : Fragment(R.layout.fragment_recycler_view) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val repository = MedicineRepository()
+        //val repository = MedicineRepository()
 
-        val viewModelFactory = MedecineViewModelFactory(repository)
-        viewModel = ViewModelProvider(this, viewModelFactory).get(RvFragmentViewModel::class.java)
+        // val viewModelFactory = MedecineViewModelFactory(repository)
+        viewModel =
+            ViewModelProvider(this/*, viewModelFactory*/).get(RvFragmentViewModel::class.java)
 
         // Инициализация View Binding
         _binding = FragmentRecyclerViewBinding.bind(view)
