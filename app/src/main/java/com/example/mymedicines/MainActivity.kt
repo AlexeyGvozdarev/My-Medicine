@@ -5,7 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
 import com.example.mymedicines.databinding.ActivityMainBinding
-import com.example.mymedicines.view.medecine.list.RecyclerViewFragment
+import com.example.mymedicines.view.medecine.list.DrugListFragment
 
 class MainActivity : AppCompatActivity() {
 
@@ -24,7 +24,7 @@ class MainActivity : AppCompatActivity() {
             // Загружаем фрагмент в контейнер
             supportFragmentManager.commit {
                 setReorderingAllowed(true)
-                replace(binding.fragmentContainerView.id, RecyclerViewFragment::class.java, null)
+                replace(binding.fragmentContainerView.id, DrugListFragment::class.java, null)
             }
         }
     }

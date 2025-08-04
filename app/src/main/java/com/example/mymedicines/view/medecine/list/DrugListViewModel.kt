@@ -6,12 +6,10 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.mymedicines.model.Item
-import com.example.mymedicines.domain.ItemRepository
 import com.example.mymedicines.domain.MedicineRepository
 import kotlinx.coroutines.launch
-import kotlin.random.Random
 
-class RvFragmentViewModel() : ViewModel() {
+class DrugListViewModel() : ViewModel() {
     private val _items = MutableLiveData<List<Item>>()
     val items: LiveData<List<Item>> get() = _items
 

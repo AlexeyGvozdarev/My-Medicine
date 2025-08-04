@@ -8,16 +8,14 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mymedicines.MainActivity
 import com.example.mymedicines.R
-import com.example.mymedicines.databinding.FragmentRecyclerViewBinding
-import com.example.mymedicines.domain.MedicineRepository
-import com.example.mymedicines.model.Item
+import com.example.mymedicines.databinding.FragmentDruglistViewBinding
 import com.example.mymedicines.view.medecine.newMed.NewMedecineFragment
 
-class RecyclerViewFragment : Fragment(R.layout.fragment_recycler_view) {
+class DrugListFragment : Fragment(R.layout.fragment_druglist_view) {
 
-    private var _binding: FragmentRecyclerViewBinding? = null
+    private var _binding: FragmentDruglistViewBinding? = null
     private val binding get() = _binding!!
-    private lateinit var viewModel: RvFragmentViewModel
+    private lateinit var viewModel: DrugListViewModel
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -26,10 +24,10 @@ class RecyclerViewFragment : Fragment(R.layout.fragment_recycler_view) {
 
         // val viewModelFactory = MedecineViewModelFactory(repository)
         viewModel =
-            ViewModelProvider(this/*, viewModelFactory*/).get(RvFragmentViewModel::class.java)
+            ViewModelProvider(this/*, viewModelFactory*/).get(DrugListViewModel::class.java)
 
         // Инициализация View Binding
-        _binding = FragmentRecyclerViewBinding.bind(view)
+        _binding = FragmentDruglistViewBinding.bind(view)
 
         // Настройка RecyclerView
         binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())
