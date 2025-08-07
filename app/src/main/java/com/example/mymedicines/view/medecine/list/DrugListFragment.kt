@@ -3,28 +3,27 @@ package com.example.mymedicines.view.medecine.list
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.View
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.mymedicines.AppComponents
 import com.example.mymedicines.MainActivity
 import com.example.mymedicines.R
 import com.example.mymedicines.databinding.FragmentDruglistViewBinding
+import com.example.mymedicines.domain.MedicineRepository
 import com.example.mymedicines.view.medecine.newMed.NewMedecineFragment
 
 class DrugListFragment : Fragment(R.layout.fragment_druglist_view) {
 
     private var _binding: FragmentDruglistViewBinding? = null
     private val binding get() = _binding!!
-    private lateinit var viewModel: DrugListViewModel
+    private val viewModel: DrugListViewModel by viewModels {
+        MedecineViewModelFactory(AppComponents.medicineRepository)
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        //val repository = MedicineRepository()
-
-        // val viewModelFactory = MedecineViewModelFactory(repository)
-        viewModel =
-            ViewModelProvider(this/*, viewModelFactory*/).get(DrugListViewModel::class.java)
 
         // Инициализация View Binding
         _binding = FragmentDruglistViewBinding.bind(view)
