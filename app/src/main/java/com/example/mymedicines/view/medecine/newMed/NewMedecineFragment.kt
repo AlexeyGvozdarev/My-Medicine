@@ -7,13 +7,17 @@ import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
 import androidx.fragment.app.Fragment
+import com.example.mymedicines.AppComponents
 import com.example.mymedicines.MainActivity
 import com.example.mymedicines.databinding.FragmentNewMedecineBinding
-import com.example.mymedicines.databinding.FragmentRecyclerViewBinding
+import com.example.mymedicines.domain.ItemRepository
+
 
 class NewMedecineFragment : Fragment() {
     private var _binding: FragmentNewMedecineBinding? = null
-    private val viewModel: NewMedecineViewModel by viewModels()
+    private val viewModel: NewMedecineViewModel by viewModels {
+        NewMedecineViewModelFactory(AppComponents.medicineRepository)
+    }
     private val binding get() = _binding!!
 
     override fun onCreateView(

@@ -19,7 +19,7 @@ class DrugListFragment : Fragment(R.layout.fragment_druglist_view) {
     private var _binding: FragmentDruglistViewBinding? = null
     private val binding get() = _binding!!
     private val viewModel: DrugListViewModel by viewModels {
-        MedecineViewModelFactory(AppComponents.medicineRepository)
+        DrugListViewModel(AppComponents.medicineRepository)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
