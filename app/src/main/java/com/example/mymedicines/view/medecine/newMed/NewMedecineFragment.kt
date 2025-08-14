@@ -11,12 +11,15 @@ import com.example.mymedicines.AppComponents
 import com.example.mymedicines.MainActivity
 import com.example.mymedicines.databinding.FragmentNewMedecineBinding
 import com.example.mymedicines.domain.ItemRepository
+import com.example.mymedicines.view.core.ViewModelFactory
 
 
 class NewMedecineFragment : Fragment() {
     private var _binding: FragmentNewMedecineBinding? = null
     private val viewModel: NewMedecineViewModel by viewModels {
-        NewMedecineViewModelFactory(AppComponents.medicineRepository)
+        ViewModelFactory {
+            NewMedecineViewModel(AppComponents.medicineRepository)
+        }
     }
     private val binding get() = _binding!!
 
@@ -33,11 +36,16 @@ class NewMedecineFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.returnFab.setOnClickListener {
-            //подготавливаем данные для передачи
-            val resultData = bundleOf("dataKey" to binding.editText.text.toString())
-            //отправка резулььтата
-            parentFragmentManager.setFragmentResult("requestKey", resultData)
-            //возврат на первый фрагмент
+            val text = binding.editText.text.toString()
+
+            viewModel.addNewIItem(text)
+
+            // Добавляем сохранение через ViewModel
+//            //подготавливаем данные для передачи
+//            val resultData = bundleOf("dataKey" to binding.editText.text.toString())
+//            //отправка резулььтата
+//            parentFragmentManager.setFragmentResult("requestKey", resultData)
+//            //возврат на первый фрагмент
             (activity as? MainActivity)?.popFragmentBack()
         }
     }

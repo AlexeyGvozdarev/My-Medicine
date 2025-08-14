@@ -12,6 +12,7 @@ import com.example.mymedicines.MainActivity
 import com.example.mymedicines.R
 import com.example.mymedicines.databinding.FragmentDruglistViewBinding
 import com.example.mymedicines.domain.MedicineRepository
+import com.example.mymedicines.view.core.ViewModelFactory
 import com.example.mymedicines.view.medecine.newMed.NewMedecineFragment
 
 class DrugListFragment : Fragment(R.layout.fragment_druglist_view) {
@@ -19,7 +20,9 @@ class DrugListFragment : Fragment(R.layout.fragment_druglist_view) {
     private var _binding: FragmentDruglistViewBinding? = null
     private val binding get() = _binding!!
     private val viewModel: DrugListViewModel by viewModels {
-        DrugListViewModel(AppComponents.medicineRepository)
+        ViewModelFactory {
+            DrugListViewModel(AppComponents.medicineRepository)
+        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

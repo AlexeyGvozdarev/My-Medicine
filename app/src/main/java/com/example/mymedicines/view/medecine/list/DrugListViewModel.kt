@@ -31,7 +31,6 @@ class DrugListViewModel(repository: ItemRepository) : ViewModel() {
         Log.d("TAG", "addItems: $items")
         viewModelScope.launch {
             repository.addItem(newItem)
-
         }
     }
 }
