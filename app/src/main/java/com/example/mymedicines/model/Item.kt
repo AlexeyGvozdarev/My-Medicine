@@ -12,6 +12,4 @@ data class Item(
         if (number == null) return false
         return number % 2 == 0
     }
-
-
 }

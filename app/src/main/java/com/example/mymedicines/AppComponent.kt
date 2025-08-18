@@ -5,7 +5,7 @@ import com.example.mymedicines.domain.MedicineRepository
 
 object AppComponents {
 
-    val medicineRepository: /*ItemRepository*/MedicineRepository by lazy { MedicineRepository() }
+    val medicineRepository: MedicineRepository by lazy { MedicineRepository() }
 }
 
 

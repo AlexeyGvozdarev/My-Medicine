@@ -24,15 +24,6 @@ class DrugListViewModel(private val repository: ItemRepository) : ViewModel() {
             }
         }
     }
-
-    fun addNewItem(item: String) {
-        val newItem = Item(item)
-
-        Log.d("TAG", "addItems: $items")
-        viewModelScope.launch {
-            repository.addItem(newItem)
-        }
-    }
 }
 
 

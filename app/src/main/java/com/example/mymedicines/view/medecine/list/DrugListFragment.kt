@@ -41,8 +41,6 @@ class DrugListFragment : Fragment(R.layout.fragment_druglist_view) {
             adapter.updateItems(items)
         })
 
-
-
         binding.fab.setOnClickListener() {
 
             (activity as? MainActivity)?.replaceFragment(NewMedecineFragment())
