@@ -37,15 +37,7 @@ class NewMedecineFragment : Fragment() {
 
         binding.returnFab.setOnClickListener {
             val text = binding.editText.text.toString()
-
             viewModel.addNewIItem(text)
-
-            // Добавляем сохранение через ViewModel
-//            //подготавливаем данные для передачи
-//            val resultData = bundleOf("dataKey" to binding.editText.text.toString())
-//            //отправка резулььтата
-//            parentFragmentManager.setFragmentResult("requestKey", resultData)
-//            //возврат на первый фрагмент
             (activity as? MainActivity)?.popFragmentBack()
         }
     }

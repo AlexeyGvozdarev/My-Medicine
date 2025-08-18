@@ -46,19 +46,7 @@ class DrugListFragment : Fragment(R.layout.fragment_druglist_view) {
         binding.fab.setOnClickListener() {
 
             (activity as? MainActivity)?.replaceFragment(NewMedecineFragment())
-            parentFragmentManager.setFragmentResultListener(
-                "requestKey",
-                this
-            ) { requestKey, bundle ->
-                if (requestKey == "requestKey") {
-                    val resultString = bundle.getString("dataKey", "")
-                    viewModel.addNewItem(resultString)
-                }
-            }
-
-
         }
-
     }
 
 
