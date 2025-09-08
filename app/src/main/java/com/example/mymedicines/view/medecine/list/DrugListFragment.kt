@@ -79,7 +79,7 @@ class DrugListFragment : Fragment(R.layout.fragment_druglist_view) {
 
         // Создание уведомления
         val notification = NotificationCompat.Builder(requireContext(), channelId)
-            .setSmallIcon(R.drawable.ic_notification)
+            .setSmallIcon(R.drawable.pill__1_)
             .setContentTitle("Переход на фрагмент информации")
             .setContentText("Нажмите для перехода")
             .setPriority(NotificationCompat.PRIORITY_DEFAULT)
