@@ -1,4 +1,4 @@
-package com.example.mymedicines
+package com.example.mymedicines.model
 
 data class Item(
     val value: String,
@@ -12,6 +12,4 @@ data class Item(
         if (number == null) return false
         return number % 2 == 0
     }
-
-
 }

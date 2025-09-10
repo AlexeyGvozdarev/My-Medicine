@@ -1,8 +1,9 @@
-package com.example.mymedicines
+package com.example.mymedicines.view.medecine.list
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.mymedicines.model.Item
 import com.example.mymedicines.databinding.ItemListBinding
 
 class MedicineAdapter(private var items: List<Item>): RecyclerView.Adapter<MedicineAdapter.ViewHolder>() {
