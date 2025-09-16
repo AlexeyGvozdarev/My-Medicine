@@ -11,17 +11,16 @@ import androidx.fragment.app.commit
 import com.example.mymedicines.databinding.ActivityMainBinding
 import com.example.mymedicines.view.medecine.info.InformationFragment
 import com.example.mymedicines.view.medecine.list.DrugListFragment
+import com.example.mymedicines.view.medecine.newMed.NewMedecineFragment
 
 class MainActivity : AppCompatActivity() {
 
-    // Переменная для View Binding
     private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         createNotificationChannel()
 
-        // Инициализация View Binding
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
@@ -42,10 +41,10 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun handleIntent(intent: Intent?) {
-        if (intent?.getBooleanExtra("OPEN_INFORMATIONFRAGMENT", false) == true) {
+        if (intent?.getBooleanExtra("OPEN_NEWMEDECCINEFRAGMENT", false) == true) {
             supportFragmentManager.beginTransaction()
-                .replace(R.id.fragmentContainerView, InformationFragment())
-                .addToBackStack("informationFragment")
+                .replace(R.id.fragmentContainerView, NewMedecineFragment())
+                .addToBackStack("newMedecineFragment")
                 .commit()
         }
     }
