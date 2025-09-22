@@ -11,6 +11,9 @@ import android.widget.Toast
 import com.example.mymedicines.NotificationUtils
 import com.example.mymedicines.databinding.FragmentInformationBinding
 import com.example.mymedicines.domain.NotificationReceiver
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 
 class InformationFragment : Fragment() {
     private var _binding: FragmentInformationBinding? = null
@@ -19,6 +22,7 @@ class InformationFragment : Fragment() {
     private lateinit var timePicker: TimePicker
     private lateinit var scheduleButton: Button
     private lateinit var cancelButton: Button
+    private lateinit var showNotificationButton: Button
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -35,6 +39,7 @@ class InformationFragment : Fragment() {
         timePicker = binding.timePicker
         scheduleButton = binding.btnSchedule
         cancelButton = binding.btnCancel
+        showNotificationButton = binding.showNumberOfNotification
 
         // Устанавливаем 24-часовой формат
         timePicker.setIs24HourView(true)
@@ -47,6 +52,9 @@ class InformationFragment : Fragment() {
 
         cancelButton.setOnClickListener {
             cancelScheduledNotification()
+        }
+        showNotificationButton.setOnClickListener {
+            chekSaveNotification()
         }
     }
 
@@ -130,5 +138,22 @@ class InformationFragment : Fragment() {
         alarmManager.cancel(pendingIntent)
         NotificationUtils.clearScheduledNotification(requireContext())
         Toast.makeText(requireContext(), "Уведомление отменено", Toast.LENGTH_SHORT).show()
+    }
+    private fun chekSaveNotification() {
+        val notificationData = NotificationUtils.getScheduledNotification(requireContext())
+        if (notificationData != null) {
+            val (hour, minute, triggerTime) = notificationData
+            val date = Date(triggerTime)
+            val formatter = SimpleDateFormat("dd.MM.yyyy HH:mm", Locale.getDefault())
+
+            Toast.makeText(
+                requireContext(),
+                "Сохранено: $hour:$minute (сработает: ${formatter.format(date)})",
+                Toast.LENGTH_LONG
+            ).show()
+        } else {
+            Toast.makeText(requireContext(), "Нет сохраненных уведомлений", Toast.LENGTH_SHORT)
+                .show()
+        }
     }
 }

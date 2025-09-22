@@ -25,4 +25,10 @@
         android:layout_height="wrap_content"
         android:text="Отменить уведомление" />
 
+    <Button
+        android:id="@+id/show_number_of_notification"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Показать колВо уведомлений" />
+
 </LinearLayout>
