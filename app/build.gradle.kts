@@ -63,6 +63,8 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.8.7")
     implementation(libs.androidx.legacy.support.v4)
     implementation(libs.androidx.lifecycle.livedata.ktx)
+    implementation(libs.androidx.compiler)
+    implementation(libs.androidx.databinding.compiler)
 
 
 }

@@ -11,6 +11,7 @@ import android.widget.Toast
 import com.example.mymedicines.NotificationUtils
 import com.example.mymedicines.databinding.FragmentInformationBinding
 import com.example.mymedicines.domain.NotificationReceiver
+import com.example.mymedicines.domain.NotificationScheduler
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
@@ -47,7 +48,12 @@ class InformationFragment : Fragment() {
         scheduleButton.setOnClickListener {
             val hour = timePicker.hour
             val minute = timePicker.minute
-            scheduleNotificationAtSpecificTime(hour, minute)
+            NotificationScheduler.scheduleNotificationAtSpecificTime(
+                requireContext(),
+                hour,
+                minute,
+                "InformationFragmet"
+            )
         }
 
         cancelButton.setOnClickListener {
@@ -63,66 +69,66 @@ class InformationFragment : Fragment() {
         _binding = null
     }
 
-    private fun scheduleNotificationAtSpecificTime(hourOfDay: Int, minute: Int) {
-        val alarmManager =
-            requireContext().getSystemService(android.content.Context.ALARM_SERVICE) as android.app.AlarmManager
-        val intent = android.content.Intent(requireContext(), NotificationReceiver::class.java)
-        val pendingIntent = android.app.PendingIntent.getBroadcast(
-            requireContext(),
-            0,
-            intent,
-            android.app.PendingIntent.FLAG_UPDATE_CURRENT or android.app.PendingIntent.FLAG_IMMUTABLE
-        )
-
-        // Устанавливаем календарь на нужное время
-        val calendar = java.util.Calendar.getInstance().apply {
-            timeInMillis = System.currentTimeMillis()
-            set(java.util.Calendar.HOUR_OF_DAY, hourOfDay)
-            set(java.util.Calendar.MINUTE, minute)
-            set(java.util.Calendar.SECOND, 0)
-
-            // Если время уже прошло сегодня, планируем на завтра
-            if (timeInMillis <= System.currentTimeMillis()) {
-                add(java.util.Calendar.DAY_OF_YEAR, 1)
-            }
-        }
-
-        // Сохраняем информацию о запланированном уведомлении
-        NotificationUtils.saveScheduledNotification(
-            requireContext(),
-            hourOfDay,
-            minute,
-            calendar.timeInMillis
-        )
-
-        // Устанавливаем alarm
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
-            alarmManager.setExactAndAllowWhileIdle(
-                android.app.AlarmManager.RTC_WAKEUP,
-                calendar.timeInMillis,
-                pendingIntent
-            )
-        } else if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.KITKAT) {
-            alarmManager.setExact(
-                android.app.AlarmManager.RTC_WAKEUP,
-                calendar.timeInMillis,
-                pendingIntent
-            )
-        } else {
-            alarmManager.set(
-                android.app.AlarmManager.RTC_WAKEUP,
-                calendar.timeInMillis,
-                pendingIntent
-            )
-        }
-
-        val timeText = String.format("%02d:%02d", hourOfDay, minute)
-        Toast.makeText(
-            requireContext(),
-            "Уведомление запланировано на $timeText",
-            Toast.LENGTH_SHORT
-        ).show()
-    }
+//    private fun scheduleNotificationAtSpecificTime(hourOfDay: Int, minute: Int) {
+//        val alarmManager =
+//            requireContext().getSystemService(android.content.Context.ALARM_SERVICE) as android.app.AlarmManager
+//        val intent = android.content.Intent(requireContext(), NotificationReceiver::class.java)
+//        val pendingIntent = android.app.PendingIntent.getBroadcast(
+//            requireContext(),
+//            0,
+//            intent,
+//            android.app.PendingIntent.FLAG_UPDATE_CURRENT or android.app.PendingIntent.FLAG_IMMUTABLE
+//        )
+//
+//        // Устанавливаем календарь на нужное время
+//        val calendar = java.util.Calendar.getInstance().apply {
+//            timeInMillis = System.currentTimeMillis()
+//            set(java.util.Calendar.HOUR_OF_DAY, hourOfDay)
+//            set(java.util.Calendar.MINUTE, minute)
+//            set(java.util.Calendar.SECOND, 0)
+//
+//            // Если время уже прошло сегодня, планируем на завтра
+//            if (timeInMillis <= System.currentTimeMillis()) {
+//                add(java.util.Calendar.DAY_OF_YEAR, 1)
+//            }
+//        }
+//
+//        // Сохраняем информацию о запланированном уведомлении
+//        NotificationUtils.saveScheduledNotification(
+//            requireContext(),
+//            hourOfDay,
+//            minute,
+//            calendar.timeInMillis
+//        )
+//
+//        // Устанавливаем alarm
+//        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
+//            alarmManager.setExactAndAllowWhileIdle(
+//                android.app.AlarmManager.RTC_WAKEUP,
+//                calendar.timeInMillis,
+//                pendingIntent
+//            )
+//        } else if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.KITKAT) {
+//            alarmManager.setExact(
+//                android.app.AlarmManager.RTC_WAKEUP,
+//                calendar.timeInMillis,
+//                pendingIntent
+//            )
+//        } else {
+//            alarmManager.set(
+//                android.app.AlarmManager.RTC_WAKEUP,
+//                calendar.timeInMillis,
+//                pendingIntent
+//            )
+//        }
+//
+//        val timeText = String.format("%02d:%02d", hourOfDay, minute)
+//        Toast.makeText(
+//            requireContext(),
+//            "Уведомление запланировано на $timeText",
+//            Toast.LENGTH_SHORT
+//        ).show()
+//    }
 
     private fun cancelScheduledNotification() {
         val alarmManager =
