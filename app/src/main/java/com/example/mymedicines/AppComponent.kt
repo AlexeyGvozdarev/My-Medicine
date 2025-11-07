@@ -4,7 +4,7 @@ import com.example.mymedicines.domain.ItemRepository
 import com.example.mymedicines.domain.MedicineRepository
 
 object AppComponents {
-
+    // error
     val medicineRepository: MedicineRepository by lazy { MedicineRepository() }
 }
 
